@@ -61,10 +61,10 @@ function moveItems() {
 	});
 	
 	request.done(function() {
-		$("#actionMessage").html( '<h2 class="messagebox">Tagging of ' + selectedItems.length + ' items successful!</h2>' );
+		$("#actionMessage").html( '<h2 class="messagebox">Moving ' + selectedItems.length + ' images successful!</h2>' );
 	});
 	request.fail(function() {
-		$("#actionMessage").html( '<h2 class="errorbox">Tagging of ' + selectedItems.length + ' items FAILED!</h2>' );
+		$("#actionMessage").html( '<h2 class="errorbox">Moving ' + selectedItems.length + ' images FAILED!</h2>' );
 	});
 	request.always(function() {
 		displaySearch();
