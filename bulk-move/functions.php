@@ -114,6 +114,11 @@ function processRequest()
 		$album = newAlbum($sourceAlbum);
 		$imageobj = newImage($album, $filename);	
         $result = $imageobj->move($destinationAlbum);
+		
+		if ($result != 0)
+		{
+    		header("HTTP/1.1 500 Internal Server Error");
+		}
 		echo "<p>Moving $filename - result $result</p>";
 	}
 }
