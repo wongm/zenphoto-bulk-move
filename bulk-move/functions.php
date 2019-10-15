@@ -63,6 +63,7 @@ function drawResults()
 	{
 		$itemId = $item['id'];
 		$filename = $item['filename'];
+		$mtime = $item['mtime'];
 		$caption = get_language_string($item['title'], $locale);
 		$description = get_language_string($item['desc'], $locale);
 		
@@ -73,7 +74,7 @@ function drawResults()
 	?>
 		<div class="imageOptionPanel">
 			<input type="checkbox" id="item<?php echo $itemId ?>" value="<?php echo $filename ?>" class="imageCheckbox imageOption">
-			<label for="item<?php echo $itemId ?>"><?php echo $caption ?></label>
+			<label for="item<?php echo $itemId ?>"><?php echo $caption ?> (<?php echo zpFormattedDate(DATE_FORMAT, $mtime) ?>)</label>
 		</div>
 	<?php
 	}
