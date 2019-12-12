@@ -1,4 +1,5 @@
 $(function() {
+	//$(".datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
 	$("#search").click(runSearch);
 	$('#searchPanel input').keypress(function (e) {
 		if (e.which == 13) {

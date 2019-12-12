@@ -1,11 +1,11 @@
 <?php
 
 printAdminHeader('overview', gettext('Bulk move images'));
+printZenJavascripts()
 ?>
-<script src="bulk-move.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.3/chosen.jquery.min.js"></script>
+<script src="bulk-move.js?v=22"></script>
+<script src="/plugins/admin-chosen-dropdowns/chosen.jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="bulk-move.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.3/chosen.min.css" />
 <?php
 echo '</head>';
 ?>
