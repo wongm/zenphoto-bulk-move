@@ -40,6 +40,8 @@ function drawResults()
 	$sourceAlbum = isset($_GET['sourceAlbum']) ? $_GET['sourceAlbum'] : "";
 	$includes = isset($_GET['includes']) ? $_GET['includes'] : "";
 	$excludes = isset($_GET['excludes']) ? $_GET['excludes'] : "";
+	$dateFrom = isset($_GET['dateFrom']) ? $_GET['dateFrom'] : "";
+	$dateTo = isset($_GET['dateTo']) ? $_GET['dateTo'] : "";
 	$itemId = 0;
 	
     $sqlWhere = "a.folder = '$sourceAlbum'";
@@ -50,6 +52,14 @@ function drawResults()
 	if (strlen($excludes) > 0)
 	{
 		$sqlWhere .= " AND (IFNULL(i.title, '') NOT LIKE " . db_quote("%" . $excludes . "%") . " AND IFNULL(i.`desc`, '') NOT LIKE " . db_quote("%" . $excludes . "%") . ")";
+	}
+	if (strlen($dateFrom) > 0)
+	{
+		$sqlWhere .= " AND i.date >= " . db_quote($dateFrom);
+	}
+	if (strlen($dateTo) > 0)
+	{
+		$sqlWhere .= " AND i.date <= " . db_quote($dateTo);
 	}
 	
 	$sql = "SELECT i.id, i.filename, i.title, i.mtime, i.`desc`

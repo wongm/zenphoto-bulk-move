@@ -10,7 +10,7 @@ $(function() {
 });
 
 function runSearch() {
-	$url = "?action=search&sourceAlbum=" + $("#sourceAlbum").val() + "&includes=" + $("#includes").val() + "&excludes=" + $("#excludes").val();
+	$url = "?action=search&sourceAlbum=" + $("#sourceAlbum").val() + "&includes=" + $("#includes").val() + "&excludes=" + $("#excludes").val() + "&dateFrom=" + $("#dateFrom").val() + "&dateTo=" + $("#dateTo").val()
 	
 	$.get($url, function( data ) {
 		$("#searchResults").toggle();

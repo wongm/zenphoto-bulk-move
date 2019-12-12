@@ -25,6 +25,10 @@ echo '</head>';
 						<input type="text" id="includes" class="panel"/>
 						<label for="excludes">Excludes</label>
 						<input type="text" id="excludes" class="panel"/>
+						<label for="dateFrom">From</label>
+						<input type="text" id="dateFrom" class="panel datepicker" placeholder="2015-01-01" />
+						<label for="dateTo">To</label>
+						<input type="text" id="dateTo" class="panel datepicker" placeholder="2015-12-12" />
 						<br style="clear:both" />
 					</div>
 					<p class="buttons">
