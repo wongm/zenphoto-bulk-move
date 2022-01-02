@@ -62,7 +62,7 @@ function drawResults()
 		$sqlWhere .= " AND i.date <= " . db_quote($dateTo);
 	}
 	
-	$sql = "SELECT i.id, i.filename, i.title, i.mtime, i.`desc`
+	$sql = "SELECT i.id, i.filename, i.title, i.date, i.`desc`
 			FROM " . prefix('images') . " i
 			INNER JOIN " . prefix('albums') . " a ON i.albumid = a.id
 			WHERE " . $sqlWhere . "
@@ -73,7 +73,7 @@ function drawResults()
 	{
 		$itemId = $item['id'];
 		$filename = $item['filename'];
-		$mtime = $item['mtime'];
+		$date = $item['date'];
 		$caption = get_language_string($item['title'], $locale);
 		$description = get_language_string($item['desc'], $locale);
 		
@@ -84,7 +84,7 @@ function drawResults()
 	?>
 		<div class="imageOptionPanel">
 			<input type="checkbox" id="item<?php echo $itemId ?>" value="<?php echo $filename ?>" class="imageCheckbox imageOption">
-			<label for="item<?php echo $itemId ?>"><?php echo $caption ?> (<?php echo zpFormattedDate(DATE_FORMAT, $mtime) ?>)</label>
+			<label for="item<?php echo $itemId ?>"><?php echo $caption ?> (<?php echo $date; ?>)</label>
 		</div>
 	<?php
 	}
