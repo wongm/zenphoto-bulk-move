@@ -4,7 +4,7 @@ printAdminHeader('overview', gettext('Bulk move images'));
 printZenJavascripts()
 ?>
 <script src="bulk-move.js?v=22"></script>
-<script src="/plugins/admin-chosen-dropdowns/chosen.jquery.min.js"></script>
+<script src="chosen.jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="bulk-move.css" />
 <?php
 echo '</head>';
