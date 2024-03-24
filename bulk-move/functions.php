@@ -2,8 +2,8 @@
 
 function drawAlbumList()
 {
-    $albumlist = array();
-	genAlbumList($albumlist);
+    global $_zp_gallery;
+	$albumlist = $_zp_gallery->getAllAlbumsFromDB();
 	echo "<option value=''>Select</option>\n";
     foreach ($albumlist as $fullfolder => $albumtitle) {
 		$singlefolder = $fullfolder;
@@ -20,6 +20,7 @@ function drawAlbumList()
 
 function drawResults()
 {
+	global $_zp_db;
 	$locale = null;
 ?>
 <form id="imageForm">
@@ -47,27 +48,27 @@ function drawResults()
     $sqlWhere = "a.folder = '$sourceAlbum'";
 	if (strlen($includes) > 0)
 	{
-		$sqlWhere .= " AND (i.title LIKE " . db_quote("%" . $includes . "%") . " OR i.`desc` LIKE " . db_quote("%" . $includes . "%") . ")";
+		$sqlWhere .= " AND (i.title LIKE " . $_zp_db->quote("%" . $includes . "%") . " OR i.`desc` LIKE " . $_zp_db->quote("%" . $includes . "%") . ")";
 	}
 	if (strlen($excludes) > 0)
 	{
-		$sqlWhere .= " AND (IFNULL(i.title, '') NOT LIKE " . db_quote("%" . $excludes . "%") . " AND IFNULL(i.`desc`, '') NOT LIKE " . db_quote("%" . $excludes . "%") . ")";
+		$sqlWhere .= " AND (IFNULL(i.title, '') NOT LIKE " . $_zp_db->quote("%" . $excludes . "%") . " AND IFNULL(i.`desc`, '') NOT LIKE " . $_zp_db->quote("%" . $excludes . "%") . ")";
 	}
 	if (strlen($dateFrom) > 0)
 	{
-		$sqlWhere .= " AND i.date >= " . db_quote($dateFrom);
+		$sqlWhere .= " AND i.date >= " . $_zp_db->quote($dateFrom);
 	}
 	if (strlen($dateTo) > 0)
 	{
-		$sqlWhere .= " AND i.date <= " . db_quote($dateTo);
+		$sqlWhere .= " AND i.date <= " . $_zp_db->quote($dateTo);
 	}
 	
 	$sql = "SELECT i.id, i.filename, i.title, i.date, i.`desc`
-			FROM " . prefix('images') . " i
-			INNER JOIN " . prefix('albums') . " a ON i.albumid = a.id
+			FROM " . $_zp_db->prefix('images') . " i
+			INNER JOIN " . $_zp_db->prefix('albums') . " a ON i.albumid = a.id
 			WHERE " . $sqlWhere . "
 			ORDER BY i.date DESC";
-	$itemResults = query_full_array($sql);
+	$itemResults = $_zp_db->queryFullArray($sql);
 	
 	foreach ($itemResults as $item)
 	{
@@ -122,8 +123,8 @@ function processRequest()
 	
 	foreach($filenames as $filename)
 	{
-		$album = newAlbum($sourceAlbum);
-		$imageobj = newImage($album, $filename);	
+		$album = AlbumBase::newAlbum($sourceAlbum);
+		$imageobj = Image::newImage($album, $filename);
         $result = $imageobj->move($destinationAlbum);
 		
 		if ($result != 0)
